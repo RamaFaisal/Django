@@ -5,6 +5,7 @@ from core.api import apiv1
 import json
 
 class ApiTestCase(TestCase):
+  
   base_url = '/api/v1/'
 
   def setUp(self):
@@ -79,6 +80,6 @@ class ApiTestCase(TestCase):
       
       comment_id = response.json()['id']
       response = self.client.delete(f'{self.base_url}comments/{comment_id}', **{'HTTP_AUTHORIZATION': 'Bearer ' + str(self.student_token)})
-      
+
       self.assertEqual(response.status_code, 200)
       self.assertFalse(Comment.objects.filter(id=comment_id).exists())
